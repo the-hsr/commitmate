@@ -83,6 +83,7 @@ CommitMate analyzes your staged Git diffs and produces meaningful, concise, and 
         ▼
 [VS Code Git Input Box] (commit message ready)
 ```
+![CommitMate Flow](src/utils/architecture.png)
 
 ### Key Modules
 
