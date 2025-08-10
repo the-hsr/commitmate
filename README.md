@@ -150,7 +150,7 @@ feat/user-auth:
 ***
 
 **Note:**  
-- Make sure to set your Groq API Key in the settings or as the `GROQ_API_KEY` environment variable.
+- Make sure to set your Groq API Key when prompted.
 - Open to contributions, bugs, and feature requests!
 
 ***
