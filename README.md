@@ -12,7 +12,7 @@ CommitMate analyzes your staged Git diffs and produces meaningful, concise, and 
 - 📏 **Follows Commit Guidelines** — Supports Conventional Commits or your custom style.
 - ⚡ **Groq-Powered** — Uses `llama3-8b-8192` for fast, context-aware summaries.
 - 🎯 **Minimal or Detailed** — Smart rules adapt to small or large changes.
-- 🔑 **Customizable API Key & Model** — Configure via settings or environment variables.
+- 🔑 **Customizable API Key & Model** — Configure via VSCode prompt.
 
 ***
 
