@@ -13,6 +13,7 @@ CommitMate analyzes your staged Git diffs and produces meaningful, concise, and 
 - ⚡ **Groq-Powered** — Uses `llama3-8b-8192` for fast, context-aware summaries.
 - 🎯 **Minimal or Detailed** — Smart rules adapt to small or large changes.
 - 🔑 **Customizable API Key & Model** — Configure via VSCode prompt.
+- 📂 **Source Control Integration** — Access directly from the Git side menu for quick commits.
 
 ***
 
@@ -25,8 +26,7 @@ CommitMate analyzes your staged Git diffs and produces meaningful, concise, and 
    ```
 2. **Install dependencies and compile:**
    ```shell
-   npm install
-   npm run compile
+   npm run build
    ```
 3. **Open in VS Code:**
    ```shell

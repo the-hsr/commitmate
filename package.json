@@ -3,6 +3,7 @@
   "displayName": "CommitMate",
   "version": "0.0.1",
   "publisher": "thehsr",
+  "icon": "assets/logo.png",
   "description": "An AI-powered VS Code extension that analyzes your staged Git diffs and meaningful. concise commit messages.",
   "engines": {
     "vscode": "^1.80.0"
@@ -10,6 +11,7 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "scripts": {
+    "build": "npm install && npm run compile",
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -w -p ./"
@@ -20,7 +22,15 @@
         "command": "commitmate.generateCommitMessage",
         "title": "CommitMate: Generate Commit Message"
       }
-    ]
+    ],
+    "menus": {
+      "scm/title": [
+        {
+          "command": "commitmate.generateCommitMessage",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "dependencies": {
     "groq-sdk": "^0.30.0"
