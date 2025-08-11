@@ -21,12 +21,20 @@
       {
         "command": "commitmate.generateCommitMessage",
         "title": "CommitMate: Generate Commit Message"
+      },
+      {
+        "command": "commitmate.getAllCommitsOverview",
+        "title": "CommitMate: Glimpse of Branch Commits"
       }
     ],
     "menus": {
       "scm/title": [
         {
           "command": "commitmate.generateCommitMessage",
+          "group": "navigation"
+        },
+        {
+          "command": "commitmate.getAllCommitsOverview",
           "group": "navigation"
         }
       ]

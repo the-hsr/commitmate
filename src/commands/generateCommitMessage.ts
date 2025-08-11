@@ -4,31 +4,12 @@ import { GitService } from "../services/gitService";
 import { AiService } from "../services/aiService";
 import { formatCommitMessage } from "../utils/messageFormatter";
 import { showInfo, showWarning, showError } from "../utils/vscodeUtils";
-import { exec } from "child_process";
-import { promisify } from "util";
 
 // Import Constants
 import { commitTypeList, CommitType } from "../constants/commitTypes";
 import { Messages } from "../constants/messages";
 
-const execp = promisify(exec);
-
-async function isGitAvailable(): Promise<boolean> {
-  try {
-    const { stdout } = await execp("git --version");
-    return stdout.toLowerCase().includes("git version");
-  } catch {
-    return false;
-  }
-}
-
 export async function generateCommitMessage(context: vscode.ExtensionContext) {
-    const gitAvailable = await isGitAvailable();
-    if (!gitAvailable) {
-        showError(Messages.GIT_NOT_FOUND);
-        return;
-    }
-
     try {
         const apiKey = await ApiKeyService.getApiKey(context);
         if (!apiKey) return;
