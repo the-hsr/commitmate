@@ -6,7 +6,7 @@ export class ApiKeyService {
 
         if (!apiKey) {
             apiKey = await vscode.window.showInputBox({
-                prompt: "Enter your Groq API Key",
+                prompt: "Enter your Groq API Key (Can be found at: https://console.groq.com/keys)",
                 ignoreFocusOut: true,
                 password: true
             });
