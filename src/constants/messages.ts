@@ -1,4 +1,5 @@
 export const Messages = {
+  GIT_NOT_FOUND: "Git is not installed or not found in PATH. Please install Git to use this feature.",
   NO_STAGED_CHANGES: "No staged changes found.",
   COMMIT_TYPE_NOT_SELECTED: "Commit type not selected.",
   NO_COMMIT_MESSAGE: "No commit message generated.",
