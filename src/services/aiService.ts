@@ -1,8 +1,6 @@
 import Groq from "groq-sdk";
-import { Messages } from "../constants/messages";
 import { Prompts } from "../constants/prompts";
 import { Config } from "../constants/config";
-import { Commands } from "../constants/commands";
 
 export class AiService {
     static async generateCommitMessage(apiKey: string, diff: string): Promise<string | undefined> {
