@@ -1,5 +1,4 @@
 import * as vscode from "vscode";
-import { ApiKeyService } from "../services/apiKeyService";
 import { GitService } from "../services/gitService";
 import { AiService } from "../services/aiService";
 import { formatCommitMessage } from "../utils/messageFormatter";
@@ -11,8 +10,11 @@ import { Messages } from "../constants/messages";
 
 export async function generateCommitMessage(context: vscode.ExtensionContext) {
     try {
-        const apiKey = await ApiKeyService.getApiKey(context);
-        if (!apiKey) return;
+        const apiKey = await context.secrets.get("groqApiKey");
+        if (!apiKey) {
+            showError(Messages.GROQ_API_KEY_NOT_FOUND);
+            return;
+        }
 
         const diff = await GitService.getStagedDiff();
         if (!diff.trim()) {
@@ -22,7 +24,7 @@ export async function generateCommitMessage(context: vscode.ExtensionContext) {
 
         const commitType = await vscode.window.showQuickPick(
             commitTypeList, 
-            { placeHolder: "Select commit type" }
+            { placeHolder: Messages.SELECT_COMMIT_TYPE }
         ) as CommitType | undefined;
 
         if (!commitType) {
@@ -32,9 +34,9 @@ export async function generateCommitMessage(context: vscode.ExtensionContext) {
 
         const commitContent = await vscode.window.withProgress({
             location: vscode.ProgressLocation.Notification,
-            title: "Generating commit message...",
+            title: Messages.GENERATING_COMMIT_MESSAGE,
             cancellable: false
-        }, async (progress) => {
+        }, async () => {
             return await AiService.generateCommitMessage(apiKey, diff);
         });
 
@@ -47,7 +49,7 @@ export async function generateCommitMessage(context: vscode.ExtensionContext) {
 
         await vscode.env.clipboard.writeText(finalMessage);
 
-        const outputChannel = vscode.window.createOutputChannel("AI Commit Message");
+        const outputChannel = vscode.window.createOutputChannel(Messages.OUTPUT_CHANNEL);
         outputChannel.clear();
         outputChannel.appendLine(finalMessage);
         outputChannel.show();

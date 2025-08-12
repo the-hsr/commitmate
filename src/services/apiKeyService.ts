@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 
 export class ApiKeyService {
     static async getApiKey(context: vscode.ExtensionContext): Promise<string | undefined> {
-        let apiKey = context.globalState.get<string>("groqApiKey");
+        let apiKey = await context.secrets.get("groqApiKey");
 
         if (!apiKey) {
             apiKey = await vscode.window.showInputBox({
@@ -12,7 +12,7 @@ export class ApiKeyService {
             });
 
             if (apiKey) {
-                await context.globalState.update("groqApiKey", apiKey);
+                await context.secrets.store("groqApiKey", apiKey.trim());
                 vscode.window.showInformationMessage("Groq API key saved successfully!");
             }
         }
