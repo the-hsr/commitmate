@@ -27,6 +27,11 @@
         "command": "commitmate.branchCommitSummary",
         "title": "CommitMate: Glimpse of Branch Commits",
         "category": "CommitMate"
+      },
+      {
+        "command": "commitmate.resetExtension",
+        "title": "CommitMate: Reset Extension",
+        "category": "CommitMate"
       }
     ],
     "menus": {

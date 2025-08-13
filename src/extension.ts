@@ -4,9 +4,12 @@ import { getBranchCommitSummaryMenu } from "./commands/getBranchCommitSummaryMen
 import { Commands } from "./constants/commands";
 import { checkPrerequisites } from "./utils/prerequisites";
 import { registerCommands } from "./utils/registerCommands";
+import { ContextService } from "./services/contextService";
 
 
 export async function activate(context: vscode.ExtensionContext) {
+    ContextService.setContext(context);
+
     if (!(await checkPrerequisites(context))) {
         return;
     }

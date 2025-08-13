@@ -4,6 +4,8 @@ import { Config } from "../constants/config";
 import {  GitService } from "./gitService";
 import { Messages } from "../constants/messages";
 import { isInternetAvailable, showError } from "../utils/vscodeUtils";
+import { ContextService } from "./contextService";
+import { getApiKeyOrShowError } from "../utils/apiKeyUtils";
 
 export class AiService {
     private static groqInstance(apiKey: string) {
@@ -11,15 +13,19 @@ export class AiService {
     }
 
     private static async generateResponse(
-        apiKey: string,
         prompt: string,
         systemMessage: string = Messages.SYSTEM_MESSAGE
     ): Promise<string | undefined> {
         const online = await isInternetAvailable();
+        const context = ContextService.getContext();
+        const apiKey = await getApiKeyOrShowError();
+
         if(!online) {
             showError(Messages.NO_INTERNET_CONNECTION);
             return;
         }
+
+        if (!apiKey) return;
 
         try {
             const groq = this.groqInstance(apiKey);
@@ -41,31 +47,27 @@ export class AiService {
         }
     }
 
-    static async generateCommitMessage(apiKey: string, diff: string): Promise<string | undefined> {
+    static async generateCommitMessage(diff: string): Promise<string | undefined> {
         return this.generateResponse(
-            apiKey,
             Prompts.COMMIT_MESSAGE(diff)
         );
     }
 
-    static async generateShortTitleMessage(apiKey: string, commitsContent: string) {
+    static async generateShortTitleMessage(commitsContent: string) {
         return this.generateResponse(
-            apiKey,
             Prompts.SHORT_TITLE_MESSAGE(commitsContent)
         );
     }
 
-    static async generateBranchSummary(apiKey: string, commitsLog: string) {
+    static async generateBranchSummary(commitsLog: string) {
         return this.generateResponse(
-            apiKey,
             Prompts.BRANCH_SUMMARY(commitsLog)
         );
     }
 
-    static async generateAuthorSpecificBranchSummary(apiKey: string, commitsLog: string) {
+    static async generateAuthorSpecificBranchSummary(commitsLog: string) {
         const currentUser = await GitService.getCurrentGitUser();
         return this.generateResponse(
-            apiKey,
             Prompts.AUTHOR_SPECIFIC_BRANCH_SUMMARY(commitsLog, currentUser)
         );
     }

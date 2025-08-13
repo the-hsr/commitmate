@@ -3,26 +3,16 @@ import { GitService } from "../services/gitService";
 import { AiService } from "../services/aiService";
 import { formatCommitMessage } from "../utils/messageFormatter";
 import { showInfo, showWarning, showError } from "../utils/vscodeUtils";
+import { getApiKeyOrShowError } from "../utils/apiKeyUtils";
 
 // Import Constants
 import { commitTypeList, CommitType } from "../constants/commitTypes";
 import { Messages } from "../constants/messages";
-import { isInternetAvailable } from "../utils/vscodeUtils";
 
 export async function generateCommitMessage(context: vscode.ExtensionContext) {
     try {
-
-        const online = await isInternetAvailable();
-        if (!online) {
-            vscode.window.showErrorMessage("No internet connection. Please connect to the internet and try again.");
-            return;
-        }
-        
-        const apiKey = await context.secrets.get("groqApiKey");
-        if (!apiKey) {
-            showError(Messages.GROQ_API_KEY_NOT_FOUND);
-            return;
-        }
+        const apiKey = await getApiKeyOrShowError();
+        if(!apiKey) return;
 
         const diff = await GitService.getStagedDiff();
         if (!diff.trim()) {
@@ -45,7 +35,7 @@ export async function generateCommitMessage(context: vscode.ExtensionContext) {
             title: Messages.GENERATING_COMMIT_MESSAGE,
             cancellable: false
         }, async () => {
-            return await AiService.generateCommitMessage(apiKey, diff);
+            return await AiService.generateCommitMessage(diff);
         });
 
         if (!commitContent) {
@@ -53,7 +43,7 @@ export async function generateCommitMessage(context: vscode.ExtensionContext) {
             return;
         }
 
-        const titleWords = await AiService.generateShortTitleMessage(apiKey, commitContent);
+        const titleWords = await AiService.generateShortTitleMessage(commitContent);
 
         const finalMessage = formatCommitMessage(commitType, commitContent, titleWords ?? "");
 

@@ -6,13 +6,6 @@ import { Messages } from "../constants/messages";
 
 export async function showAuthorSpecificCommits(context: vscode.ExtensionContext) {
     try {
-        // API key should already be set during activate()
-        const apiKey = await context.secrets.get("groqApiKey");
-        if (!apiKey) {
-            showError(Messages.GROQ_API_KEY_NOT_FOUND);
-            return;
-        }
-
         const commitsLog = await GitService.getAuthorSpecificCommits();
         if (!commitsLog.trim()) {
             showWarning(Messages.NO_COMMITS_FOUND);
@@ -24,7 +17,7 @@ export async function showAuthorSpecificCommits(context: vscode.ExtensionContext
             title: Messages.GENERATING_AUTHOR_SUMMARY,
             cancellable: false
         }, async () => {
-            return await AiService.generateAuthorSpecificBranchSummary(apiKey, commitsLog);
+            return await AiService.generateAuthorSpecificBranchSummary(commitsLog);
         });
 
         if (!summary) {

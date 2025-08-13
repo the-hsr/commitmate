@@ -6,12 +6,6 @@ import { Messages } from "../constants/messages";
 
 export async function showBranchCommitsSummary(context: vscode.ExtensionContext) {
     try {
-        const apiKey = await context.secrets.get("groqApiKey");
-        if (!apiKey) {
-            showError(Messages.GROQ_API_KEY_NOT_FOUND);
-            return;
-        }
-
         const commitsLog = await GitService.getBranchCommits();
         if (!commitsLog.trim()) {
             showWarning(Messages.NO_COMMITS_FOUND);
@@ -23,7 +17,7 @@ export async function showBranchCommitsSummary(context: vscode.ExtensionContext)
             title: Messages.GENERATING_BRANCH_SUMMARY,
             cancellable: false
         }, async () => {
-            return await AiService.generateBranchSummary(apiKey, commitsLog);
+            return await AiService.generateBranchSummary(commitsLog);
         });
 
         if (!summary) {
