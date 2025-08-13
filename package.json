@@ -20,13 +20,28 @@
     "commands": [
       {
         "command": "commitmate.generateCommitMessage",
-        "title": "CommitMate: Generate Commit Message"
+        "title": "CommitMate: Generate Commit Message",
+        "category": "CommitMate"
+      },
+      {
+        "command": "commitmate.branchCommitSummary",
+        "title": "CommitMate: Glimpse of Branch Commits",
+        "category": "CommitMate"
+      },
+      {
+        "command": "commitmate.resetExtension",
+        "title": "CommitMate: Reset Extension",
+        "category": "CommitMate"
       }
     ],
     "menus": {
       "scm/title": [
         {
           "command": "commitmate.generateCommitMessage",
+          "group": "navigation"
+        },
+        {
+          "command": "commitmate.branchCommitSummary",
           "group": "navigation"
         }
       ]

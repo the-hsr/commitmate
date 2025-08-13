@@ -1,16 +1,8 @@
-export function formatCommitMessage(commitType: string, commitMessage: string): string {
-  const firstBullet = commitMessage.split("\n").find(line => line.trim().startsWith("-")) || "";
-  
-  const titleWords = firstBullet
-    .replace(/^-/, "")
-    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"']/g, "")
-    .trim()
-    .split(/\s+/)
-    .slice(0, 3)
-    .join("-");
+export function formatCommitMessage(commitType: string, commitMessage: string, titleWords: string): string {
+  const shortTitleMessage = titleWords.replace(/\s+/g, "-").toLowerCase();
 
   const formattedTitle = titleWords
-    ? `${commitType}/${titleWords.toLowerCase()}:`
+    ? `${commitType}/${shortTitleMessage}:`
     : `${commitType}:`;
 
   return `${formattedTitle}\n${commitMessage}`;

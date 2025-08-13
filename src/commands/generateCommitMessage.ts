@@ -1,37 +1,18 @@
 import * as vscode from "vscode";
-import { ApiKeyService } from "../services/apiKeyService";
 import { GitService } from "../services/gitService";
 import { AiService } from "../services/aiService";
 import { formatCommitMessage } from "../utils/messageFormatter";
 import { showInfo, showWarning, showError } from "../utils/vscodeUtils";
-import { exec } from "child_process";
-import { promisify } from "util";
+import { getApiKeyOrShowError } from "../utils/apiKeyUtils";
 
 // Import Constants
 import { commitTypeList, CommitType } from "../constants/commitTypes";
 import { Messages } from "../constants/messages";
 
-const execp = promisify(exec);
-
-async function isGitAvailable(): Promise<boolean> {
-  try {
-    const { stdout } = await execp("git --version");
-    return stdout.toLowerCase().includes("git version");
-  } catch {
-    return false;
-  }
-}
-
 export async function generateCommitMessage(context: vscode.ExtensionContext) {
-    const gitAvailable = await isGitAvailable();
-    if (!gitAvailable) {
-        showError(Messages.GIT_NOT_FOUND);
-        return;
-    }
-
     try {
-        const apiKey = await ApiKeyService.getApiKey(context);
-        if (!apiKey) return;
+        const apiKey = await getApiKeyOrShowError();
+        if(!apiKey) return;
 
         const diff = await GitService.getStagedDiff();
         if (!diff.trim()) {
@@ -41,7 +22,7 @@ export async function generateCommitMessage(context: vscode.ExtensionContext) {
 
         const commitType = await vscode.window.showQuickPick(
             commitTypeList, 
-            { placeHolder: "Select commit type" }
+            { placeHolder: Messages.SELECT_COMMIT_TYPE }
         ) as CommitType | undefined;
 
         if (!commitType) {
@@ -51,10 +32,10 @@ export async function generateCommitMessage(context: vscode.ExtensionContext) {
 
         const commitContent = await vscode.window.withProgress({
             location: vscode.ProgressLocation.Notification,
-            title: "Generating commit message...",
+            title: Messages.GENERATING_COMMIT_MESSAGE,
             cancellable: false
-        }, async (progress) => {
-            return await AiService.generateCommitMessage(apiKey, diff);
+        }, async () => {
+            return await AiService.generateCommitMessage(diff);
         });
 
         if (!commitContent) {
@@ -62,11 +43,13 @@ export async function generateCommitMessage(context: vscode.ExtensionContext) {
             return;
         }
 
-        const finalMessage = formatCommitMessage(commitType, commitContent);
+        const titleWords = await AiService.generateShortTitleMessage(commitContent);
+
+        const finalMessage = formatCommitMessage(commitType, commitContent, titleWords ?? "");
 
         await vscode.env.clipboard.writeText(finalMessage);
 
-        const outputChannel = vscode.window.createOutputChannel("AI Commit Message");
+        const outputChannel = vscode.window.createOutputChannel(Messages.OUTPUT_CHANNEL);
         outputChannel.clear();
         outputChannel.appendLine(finalMessage);
         outputChannel.show();
