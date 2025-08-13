@@ -71,4 +71,10 @@ export class AiService {
             Prompts.AUTHOR_SPECIFIC_BRANCH_SUMMARY(commitsLog, currentUser)
         );
     }
+
+    static async generateMergeRequestTemplate(commitsLog: string, usersInput: string) {
+        return this.generateResponse(
+            Prompts.MERGE_REQUEST_TEMPLATE(commitsLog, usersInput)
+        );
+    }
 }
