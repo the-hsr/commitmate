@@ -22,6 +22,24 @@ export class AiService {
         return completion.choices[0]?.message?.content?.trim();
     }
 
+    static async generateShortTitleMessage(apiKey: string, commitsContent: string): Promise<string | undefined> {
+        const groq = new Groq({ apiKey });
+
+        const prompt = Prompts.SHORT_TITLE_MESSAGE(commitsContent);
+
+        const completion = await groq.chat.completions.create({
+            model: Config.DEFAULT_MODEL,
+            messages: [
+                { role: "system", content: "You are a helpful git history summarizer." },
+                { role: "user", content: prompt }
+            ],
+            temperature: Config.TEMPERATURE,
+            max_tokens: Config.MAX_TOKENS
+        });
+
+        return completion.choices[0]?.message?.content?.trim();
+    }
+
     static async generateBranchSummary(apiKey: string, commitsLog: string): Promise<string | undefined> {
         const groq = new Groq({ apiKey });
 

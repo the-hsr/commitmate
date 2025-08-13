@@ -45,7 +45,9 @@ export async function generateCommitMessage(context: vscode.ExtensionContext) {
             return;
         }
 
-        const finalMessage = formatCommitMessage(commitType, commitContent);
+        const titleWords = await AiService.generateShortTitleMessage(apiKey, commitContent);
+
+        const finalMessage = formatCommitMessage(commitType, commitContent, titleWords ?? "");
 
         await vscode.env.clipboard.writeText(finalMessage);
 

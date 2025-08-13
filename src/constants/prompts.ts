@@ -1,4 +1,10 @@
 export const Prompts = {
+  SHORT_TITLE_MESSAGE: (text: String) => `
+  Summarize the following commit description into 2-3 short, clear words for a commit title.
+  Avoid special characters, just lowercase hyphen-separated words.
+  Input: "${text}"
+  `,
+
   COMMIT_MESSAGE: (diff: string) => `
   You are an AI that writes concise Git commit messages.
 
