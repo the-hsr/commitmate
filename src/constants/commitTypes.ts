@@ -7,5 +7,4 @@ export enum CommitType {
   CHORE = "chore",
 }
 
-// For use in UI elements like QuickPick
 export const commitTypeList: string[] = Object.values(CommitType);

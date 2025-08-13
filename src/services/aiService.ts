@@ -1,7 +1,7 @@
 import Groq from "groq-sdk";
 import { Prompts } from "../constants/prompts";
 import { Config } from "../constants/config";
-import {  GitService } from "./gitService";
+import { GitService } from "./gitService";
 import { Messages } from "../constants/messages";
 import { isInternetAvailable, showError } from "../utils/vscodeUtils";
 import { ContextService } from "./contextService";

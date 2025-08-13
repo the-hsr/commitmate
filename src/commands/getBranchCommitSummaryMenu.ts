@@ -1,5 +1,4 @@
 import * as vscode from "vscode";
-
 import { showBranchCommitsSummary } from "./showBranchCommitsSummary";
 import { showAuthorSpecificCommits } from "./showAuthorSpecificCommits";
 import { Messages } from "../constants/messages";

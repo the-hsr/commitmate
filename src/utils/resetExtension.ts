@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { showInfo, showWarning } from "../utils/vscodeUtils";
+import { showInfo } from "../utils/vscodeUtils";
 import { Messages } from "../constants/messages";
 
 export async function resetExtension(context: vscode.ExtensionContext) {
