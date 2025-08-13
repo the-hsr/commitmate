@@ -3,9 +3,13 @@ import { GitService } from "../services/gitService";
 import { AiService } from "../services/aiService";
 import { showError, showWarning } from "../utils/vscodeUtils";
 import { Messages } from "../constants/messages";
+import { getApiKeyOrShowError } from "../utils/apiKeyUtils";
 
 export async function generateMergeRequestTemplate(context: vscode.ExtensionContext) {
     try {
+        const apiKey = await getApiKeyOrShowError();
+        if (!apiKey) return;
+
         const userSpecifics = await vscode.window.showInputBox({
             prompt: "Any specific details to include in the Merge Request template? (Optional)",
             placeHolder: "E.g., dependencies updated, special configs applied, performance improvement notes..."

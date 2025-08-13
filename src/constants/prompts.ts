@@ -59,24 +59,23 @@ export const Prompts = {
   ${commitsLog}`,
 
   MERGE_REQUEST_TEMPLATE: (commitsLog: string, usersInput: string) => `
-Generate a concise and professional Merge Request template.
+  Generate a concise and professional Merge Request template.
 
-Rules:
-- Do NOT include any author names, emails, or personal identifiers.
-- Base the description entirely on the commit logs provided.
-- Follow the "What, How, Why" format:
-  - **What**: Summarize the key changes from the commits.
-  - **How**: Explain the main implementation approach.
-  - **Why**: Describe the reason and motivation for the changes.
-- Write clearly and in bullet points where appropriate.
-- Keep it professional and neutral in tone.
-- If the user provided additional specifics, incorporate them appropriately.
+  Rules:
+  - Do NOT include any author names, emails, or personal identifiers.
+  - Base the description entirely on the commit logs provided.
+  - Follow the "What, How, Why" format:
+    - **What**: Summarize the key changes from the commits.
+    - **How**: Explain the main implementation approach.
+    - **Why**: Describe the reason and motivation for the changes.
+  - Write clearly and in bullet points where appropriate.
+  - Keep it professional and neutral in tone.
+  - If the user provided additional specifics, incorporate them appropriately.
 
-Commit Logs:
-${commitsLog}
+  Commit Logs:
+  ${commitsLog}
 
-Additional Specifics from User:
-${usersInput?.trim() || "None"}
-`
-
+  Additional Specifics from User:
+  ${usersInput?.trim() || "None"}
+  `
 };
