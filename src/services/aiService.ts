@@ -1,7 +1,7 @@
 import Groq from "groq-sdk";
 import { Prompts } from "../constants/prompts";
 import { Config } from "../constants/config";
-import {  GitService } from "./gitService";
+import { GitService } from "./gitService";
 import { Messages } from "../constants/messages";
 import { isInternetAvailable, showError } from "../utils/vscodeUtils";
 import { ContextService } from "./contextService";
@@ -69,6 +69,12 @@ export class AiService {
         const currentUser = await GitService.getCurrentGitUser();
         return this.generateResponse(
             Prompts.AUTHOR_SPECIFIC_BRANCH_SUMMARY(commitsLog, currentUser)
+        );
+    }
+
+    static async generateMergeRequestTemplate(commitsLog: string, usersInput: string) {
+        return this.generateResponse(
+            Prompts.MERGE_REQUEST_TEMPLATE(commitsLog, usersInput)
         );
     }
 }

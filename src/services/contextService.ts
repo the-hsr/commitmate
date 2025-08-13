@@ -1,4 +1,3 @@
-// src/services/contextService.ts
 import * as vscode from "vscode";
 import { Messages } from "../constants/messages";
 

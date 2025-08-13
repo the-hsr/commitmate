@@ -32,6 +32,11 @@
         "command": "commitmate.resetExtension",
         "title": "CommitMate: Reset Extension",
         "category": "CommitMate"
+      },
+      {
+        "command": "commitmate.mergeRequestTemplate",
+        "title": "CommitMate: Merge Request Template",
+        "category": "CommitMate"
       }
     ],
     "menus": {
@@ -42,6 +47,10 @@
         },
         {
           "command": "commitmate.branchCommitSummary",
+          "group": "navigation"
+        },
+        {
+          "command": "commitmate.mergeRequestTemplate",
           "group": "navigation"
         }
       ]

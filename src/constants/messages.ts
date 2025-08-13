@@ -12,7 +12,6 @@ export const Messages = {
   GROQ_API_KEY_NOT_FOUND: "Groq API key not found. Please reload the extension.",
   SELECT_COMMIT_TYPE: "Select commit type",
   GENERATING_COMMIT_MESSAGE: "Generating commit message...",
-  OUTPUT_CHANNEL: "AI Commit Message",
   MENU_PLACEHOLDER: "Select the type of summary you want",
   MENU_BRANCH_COMMITS_SUMMARY_LABEL: "Branch Commits Summary",
   MENU_BRANCH_COMMITS_SUMMARY_DESC: "View all commits in the current branch",
@@ -23,8 +22,10 @@ export const Messages = {
   AUTHOR_SUMMARY_ERROR: (err: string) => `Error generating author-specific branch summary: ${err}`,
   GENERATING_AUTHOR_SUMMARY: "Generating author-specific branch commits summary...",
   GENERATING_BRANCH_SUMMARY: "Generating branch commits summary...",
+  OUTPUT_CHANNEL: "CommitMate: - Commit Message",
   OUTPUT_AUTHOR_SUMMARY: "CommitMate - Author Summary",
   OUTPUT_BRANCH_SUMMARY: "CommitMate - Branch Summary",
+  OUTPUT_MERGE_REQUEST_TEMPLATE: "CommitMate - Merge Request Template",
   FAILED_TO_GENERATE_BRANCH_SUMMARY: "Failed to generate branch summary.",
   SYSTEM_MESSAGE: "You are a helpful commit message generator.",
   NO_INTERNET_CONNECTION: "No internet connection. Please connect and try again.",
@@ -34,5 +35,6 @@ export const Messages = {
   NOTHING_TO_RESET: "Nothing to reset. Groq API key is not set.",
   RESET_CONFIRMATION: "Are you sure you want to reset CommitMate? This will clear saved API key and cached data.",
   RESET_SUCCESS: "CommitMate has been reset. You will need to re-enter your API key on next use.",
-  FAILED_TO_RESET_EXTENSION: (err: string) => `Failed to reset extension: ${err}`
+  FAILED_TO_RESET_EXTENSION: (err: string) => `Failed to reset extension: ${err}`,
+  GENERATING_MERGE_REQUEST_TEMPLATE: "Generating merge request template...",
 };
