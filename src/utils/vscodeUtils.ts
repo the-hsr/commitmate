@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import * as https from 'https';
 import { exec } from "child_process";
 import { promisify } from "util";
 
@@ -15,4 +16,14 @@ export async function isGitAvailable(): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+export async function isInternetAvailable(): Promise<boolean> {
+    return new Promise((resolve) => {
+        https.get("https://www.google.com", (res) => {
+            resolve(true);
+        }).on("error", () => {
+            resolve(false);
+        });
+    });
 }

@@ -7,9 +7,17 @@ import { showInfo, showWarning, showError } from "../utils/vscodeUtils";
 // Import Constants
 import { commitTypeList, CommitType } from "../constants/commitTypes";
 import { Messages } from "../constants/messages";
+import { isInternetAvailable } from "../utils/vscodeUtils";
 
 export async function generateCommitMessage(context: vscode.ExtensionContext) {
     try {
+
+        const online = await isInternetAvailable();
+        if (!online) {
+            vscode.window.showErrorMessage("No internet connection. Please connect to the internet and try again.");
+            return;
+        }
+        
         const apiKey = await context.secrets.get("groqApiKey");
         if (!apiKey) {
             showError(Messages.GROQ_API_KEY_NOT_FOUND);

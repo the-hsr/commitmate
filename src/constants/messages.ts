@@ -22,5 +22,8 @@ export const Messages = {
   GENERATING_BRANCH_SUMMARY: "Generating branch commits summary...",
   OUTPUT_AUTHOR_SUMMARY: "CommitMate - Author Summary",
   OUTPUT_BRANCH_SUMMARY: "CommitMate - Branch Summary",
-  FAILED_TO_GENERATE_BRANCH_SUMMARY: "Failed to generate branch summary."
+  FAILED_TO_GENERATE_BRANCH_SUMMARY: "Failed to generate branch summary.",
+  SYSTEM_MESSAGE: "You are a helpful commit message generator.",
+  NO_INTERNET_CONNECTION: "No internet connection. Please connect and try again.",
+  AI_SERVICE_ERROR: (err: string) => `AI Service Error: ${err}`
 };
