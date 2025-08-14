@@ -1,12 +1,14 @@
 import * as vscode from "vscode";
 import { exec } from "child_process";
 import { showError } from "../utils/vscodeUtils";
+import { Messages } from "../constants/messages";
+import { GitCommands } from "../constants/gitCommands";
 
 export class GitService {
     private static getCwd(): string {
         const workspaceFolders = vscode.workspace.workspaceFolders;
         if (!workspaceFolders || workspaceFolders.length === 0) {
-            throw new Error("No workspace is open.");
+            throw new Error(Messages.NO_WORKSPACE_OPEN);
         }
         return workspaceFolders[0].uri.fsPath;
     }
@@ -21,23 +23,23 @@ export class GitService {
     }
 
     static async getStagedDiff(): Promise<string> {
-        return this.runGitCommand("git diff --staged");
+        return this.runGitCommand(GitCommands.GIT_DIFF);
     }
 
     static async getBranchCommits(): Promise<string> {
-        return this.runGitCommand(`git log --pretty=format:"%h %s (%an)"`);
+        return this.runGitCommand(GitCommands.GIT_LOG);
     }
 
     static async getAuthorSpecificCommits(): Promise<string> {
-        return this.runGitCommand(`git log --pretty=format:"%an: %s"`);
+        return this.runGitCommand(GitCommands.GIT_AUTHOR_LOG);
     }
 
     static async getCurrentGitUser(): Promise<string> {
-        return this.runGitCommand(`git config user.name`);
+        return this.runGitCommand(GitCommands.GIT_CONFIG_USER);
     }
 
     static async getAllBranches(): Promise<string[]> {
-        const output = await this.runGitCommand("git branch --all --no-color");
+        const output = await this.runGitCommand(GitCommands.GIT_BRANCH);
         return output
             .split("\n")
             .map(line => line.replace(/^[* ]+/, "").trim())
@@ -46,6 +48,6 @@ export class GitService {
     }
 
     static async getDiffAgainstBranch(branch: string): Promise<string> {
-        return this.runGitCommand(`git diff ${branch}`);
+        return this.runGitCommand(GitCommands.GIT_DIFF_PARENT_BRANCH(branch));
     }
 }

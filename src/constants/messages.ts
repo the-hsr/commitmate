@@ -45,5 +45,6 @@ export const Messages = {
   NO_PARENT_BRANCH_SELECTED: "No parent branch selected, moving forward with the cached diff.",
   NO_BRANCHES_FOUND: "No branches found. Proceeding with staged changes.",
   NO_CHANGES_FOUND: (branch: string) => `No changes found against branch '${branch}'.`,
-  ERROR_PERFORMING_CODE_REVIEW: (err: string) => `Error performing code review: ${err}`
+  ERROR_PERFORMING_CODE_REVIEW: (err: string) => `Error performing code review: ${err}`,
+  NO_WORKSPACE_OPEN: "No workspace is open."
 };
