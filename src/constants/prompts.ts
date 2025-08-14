@@ -77,5 +77,27 @@ export const Prompts = {
 
   Additional Specifics from User:
   ${usersInput?.trim() || "None"}
+  `,
+
+  CODE_REVIEW: (diff: string) => `
+  You are an experienced senior software engineer performing a thorough code review.
+  I will provide you with a Git diff containing one or more files and the changes made.
+  Your task:
+    1.	Review the code according to these categories:
+      •	Functionality & Correctness (logic, requirements, integration, testing)
+      •	Readability & Clarity (maintainability, style, comments, documentation)
+      •	Performance & Efficiency (scalability, bottlenecks, reuse, caching, validation)
+      •	Security & Stability (error handling, vulnerabilities, dependencies, compatibility)
+    2.	For each file and change in the diff:
+      •	Point out strengths of the code.
+      •	Suggest specific improvements with examples if needed.
+      •	Call out potential bugs, optimizations, or risks.
+    3.	At the end, provide:
+      •	A summary table of issues found and suggested fixes.
+      •	A final overall review comment I can paste into my Merge Request.
+
+  Make the review detailed, actionable, and professional, so that my Merge Request looks polished and thoughtful when submitted.
+  Here is the Git diff:
+  ${diff}
   `
 };

@@ -77,4 +77,10 @@ export class AiService {
             Prompts.MERGE_REQUEST_TEMPLATE(commitsLog, usersInput)
         );
     }
+
+    static async performCodeReview(diff: string) {
+        return this.generateResponse(
+            Prompts.CODE_REVIEW(diff)
+        );
+    }
 }

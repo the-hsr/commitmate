@@ -26,7 +26,10 @@ export const Messages = {
   OUTPUT_AUTHOR_SUMMARY: "CommitMate - Author Summary",
   OUTPUT_BRANCH_SUMMARY: "CommitMate - Branch Summary",
   OUTPUT_MERGE_REQUEST_TEMPLATE: "CommitMate - Merge Request Template",
+  OUTPUT_CODE_REVIEW: "CommitMate - Code Review",
   FAILED_TO_GENERATE_BRANCH_SUMMARY: "Failed to generate branch summary.",
+  FAILED_TO_GENERATE_MERGE_REQUEST_TEMPLATE: "Failed to generate merge request template.",
+  FAILED_TO_PERFORM_CODE_REVIEW: "Failed to perform code review.",
   SYSTEM_MESSAGE: "You are a helpful commit message generator.",
   NO_INTERNET_CONNECTION: "No internet connection. Please connect and try again.",
   AI_SERVICE_ERROR: (err: string) => `AI Service Error: ${err}`,
@@ -37,4 +40,9 @@ export const Messages = {
   RESET_SUCCESS: "CommitMate has been reset. You will need to re-enter your API key on next use.",
   FAILED_TO_RESET_EXTENSION: (err: string) => `Failed to reset extension: ${err}`,
   GENERATING_MERGE_REQUEST_TEMPLATE: "Generating merge request template...",
+  PERFORMING_CODE_REVIEW: "Performing code review...",
+  SELECT_PARENT_BRANCH: "Select the parent branch to compare against",
+  NO_PARENT_BRANCH_SELECTED: "No parent branch selected, moving forward with the cached diff.",
+  NO_BRANCHES_FOUND: "No branches found. Proceeding with staged changes.",
+  NO_CHANGES_FOUND: (branch: string) => `No changes found against branch '${branch}'.`
 };

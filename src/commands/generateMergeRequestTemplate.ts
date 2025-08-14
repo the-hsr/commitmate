@@ -30,7 +30,7 @@ export async function generateMergeRequestTemplate(context: vscode.ExtensionCont
         });
 
         if (!summary) {
-            showError(Messages.FAILED_TO_GENERATE_BRANCH_SUMMARY);
+            showError(Messages.FAILED_TO_GENERATE_MERGE_REQUEST_TEMPLATE);
             return;
         }
 

@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { exec } from "child_process";
+import { showError } from "../utils/vscodeUtils";
 
 export class GitService {
     private static getCwd(): string {
@@ -33,5 +34,18 @@ export class GitService {
 
     static async getCurrentGitUser(): Promise<string> {
         return this.runGitCommand(`git config user.name`);
+    }
+
+    static async getAllBranches(): Promise<string[]> {
+        const output = await this.runGitCommand("git branch --all --no-color");
+        return output
+            .split("\n")
+            .map(line => line.replace(/^[* ]+/, "").trim())
+            .map(branch => branch.replace(/^remotes\//, ""))
+            .filter((branch, index, arr) => branch && arr.indexOf(branch) === index);
+    }
+
+    static async getDiffAgainstBranch(branch: string): Promise<string> {
+        return this.runGitCommand(`git diff ${branch}`);
     }
 }
