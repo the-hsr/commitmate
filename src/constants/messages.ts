@@ -44,5 +44,6 @@ export const Messages = {
   SELECT_PARENT_BRANCH: "Select the parent branch to compare against",
   NO_PARENT_BRANCH_SELECTED: "No parent branch selected, moving forward with the cached diff.",
   NO_BRANCHES_FOUND: "No branches found. Proceeding with staged changes.",
-  NO_CHANGES_FOUND: (branch: string) => `No changes found against branch '${branch}'.`
+  NO_CHANGES_FOUND: (branch: string) => `No changes found against branch '${branch}'.`,
+  ERROR_PERFORMING_CODE_REVIEW: (err: string) => `Error performing code review: ${err}`
 };

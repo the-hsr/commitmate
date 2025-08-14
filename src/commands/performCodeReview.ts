@@ -56,6 +56,6 @@ export async function performCodeReview(context: vscode.ExtensionContext) {
         outputChannel.show();
 
     } catch (err: any) {
-        showError(`Error performing code review: ${err.message}`);
+        showError(Messages.ERROR_PERFORMING_CODE_REVIEW(err.message));
     }
 }
