@@ -95,7 +95,8 @@ export const Prompts = {
     3.	At the end, provide:
       •	A summary table of issues found and suggested fixes.
       •	A final overall review comment I can paste into my Merge Request.
-
+    4. Categorize suggested changes by file, if any.
+    
   Make the review detailed, actionable, and professional, so that my Merge Request looks polished and thoughtful when submitted.
   Here is the Git diff:
   ${diff}
