@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 import { exec } from "child_process";
-import { showError } from "../utils/vscodeUtils";
 import { Messages } from "../constants/messages";
 import { GitCommands } from "../constants/gitCommands";
 

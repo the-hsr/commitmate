@@ -46,5 +46,10 @@ export const Messages = {
   NO_BRANCHES_FOUND: "No branches found. Proceeding with staged changes.",
   NO_CHANGES_FOUND: (branch: string) => `No changes found against branch '${branch}'.`,
   ERROR_PERFORMING_CODE_REVIEW: (err: string) => `Error performing code review: ${err}`,
-  NO_WORKSPACE_OPEN: "No workspace is open."
+  NO_WORKSPACE_OPEN: "No workspace is open.",
+  MERGE_REQUEST_TEMPLATE_USER_SPECIFICS: "Any specific details to include in the Merge Request template? (Optional)",
+  MERGE_REQUEST_TEMPLATE_USER_SPECIFICS_PLACEHOLDER: "E.g., dependencies updated, special configs applied, performance improvement notes...",
+  ERROR_GENERATING_MERGE_REQUEST_TEMPLATE: (err: string) => `Error generating merge request template: ${err}`,
+  ERROR_GENERATING_COMMIT_MESSAGE: (err: string) => `Error generating commit message: ${err}`,
+  ERROR_GENERATING_BRANCH_SUMMARY: (err: string) => `Error generating branch summary: ${err}`
 };
