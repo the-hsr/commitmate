@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "publisher": "thehsr",
   "icon": "assets/featureImage.png",
-  "description": "An AI-powered VS Code extension that analyzes your staged Git diffs and meaningful. concise commit messages.",
+  "description": "Streamline Git workflow by integrating AI-powered commit messages, summaries, merge request templates, and code reviews directly into VS Code.",
   "engines": {
     "vscode": "^1.80.0"
   },
