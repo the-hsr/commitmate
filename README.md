@@ -1,19 +1,24 @@
 # CommitMate
 
-🚀 **AI-powered Git commit message generator for VS Code, using Groq for blazing-fast and intelligent suggestions.**
+🚀 **AI-powered Git assistant for VS Code — generate commit messages, summaries, PR templates, and code reviews with Groq for blazing-fast, intelligent results.**
 
-CommitMate analyzes your staged Git diffs and produces meaningful, concise, and well-structured commit messages following best practices.
+CommitMate streamlines your Git workflow inside VS Code with **AI-powered commit messages, summaries, PR templates, and automated code reviews**.  
+This extension acts as your **AI Git companion**, helping you maintain clean commit history, professional pull requests, and higher-quality code – all without leaving your editor.
 
 ***
 
 ## ✨ Features
 
-- 🧠 **AI-Generated Commit Messages** — Understands your code changes and summarizes them.
-- 📏 **Follows Commit Guidelines** — Supports Conventional Commits or your custom style.
-- ⚡ **Groq-Powered** — Uses `llama3-8b-8192` for fast, context-aware summaries.
-- 🎯 **Minimal or Detailed** — Smart rules adapt to small or large changes.
-- 🔑 **Customizable API Key & Model** — Configure via VSCode prompt.
-- 📂 **Source Control Integration** — Access directly from the Git side menu for quick commits.
+- 🧠 **AI-Generated Commit Messages** — Automatically generates meaningful commit messages from your `git diff`.
+- 📏 **Follows Commit Guidelines** — Supports Conventional Commits or your custom style for consistency.
+- ⚡ **Groq-Powered** — Uses `llama3-8b-8192` for blazing-fast, context-aware suggestions.
+- 🎯 **Adaptive Summaries** — Provides minimal or detailed messages based on the scope of changes.
+- 📂 **Source Control Integration** — Accessible directly from the Git side menu for quick commits.
+- 📜 **Branch & Author Commit Summaries** — Summarizes commit history (`git log`) scoped by branch or author.
+- 📝 **Merge/Pull Request Template Generator** — Creates clear PR/MR templates following the WHAT, HOW, WHY format.
+- 🔍 **AI Code Review Assistant** — Reviews your `git diff`, highlights issues, and suggests improvements.
+- ♻️ **Extension Reset** — Easily reset API keys and cached data for predictable and secure behavior.
+- 🔑 **Customizable API Key & Model** — Configure Groq API key and choose your preferred model via VS Code prompt.
 
 ***
 
@@ -37,29 +42,15 @@ CommitMate analyzes your staged Git diffs and produces meaningful, concise, and 
 
 ***
 
-## 🚀 Usage
-
-1. **Stage your changes in Git:**
-   ```shell
-   git add .
-   ```
-2. **Generate Commit Message:**
-   - Press `Ctrl+Shift+P` / `Cmd+Shift+P` → **Git Commit AI: Generate Commit Message**
-   - _Or_ bind it to a custom keyboard shortcut.
-3. **AI will automatically:**
-   - Detect the size of your changes.
-   - Generate one of:
-     - A single concise commit line (for small changes)
-     - Up to 4–5 bullet points (for significant changes)
-   - The commit message is copied into your Git commit input box.
-
-***
-
 ## 🧩 Commands
 
-| Command                            | Description                                      |
-|------------------------------------|--------------------------------------------------|
-| `commitmate.generateCommitMessage` | Generate an AI commit message for staged changes |
+| Command                                  | Description                                                                 |
+|------------------------------------------|-----------------------------------------------------------------------------|
+| `commitmate.generateCommitMessage`       | Generate an AI-powered commit message for staged changes.                   |
+| `commitmate.branchCommitSummary`         | Summarize commit history for the current branch, scoped by branch or author.|
+| `commitmate.mergeRequestTemplate`        | Generate a structured PR/MR template (WHAT, HOW, WHY).                      |
+| `commitmate.performCodeReview`           | Perform an AI-powered code review on your staged changes.                   |
+| `commitmate.resetExtension`              | Reset API keys and cached data for secure and predictable behavior.         |
 
 ***
 
@@ -72,18 +63,17 @@ CommitMate analyzes your staged Git diffs and produces meaningful, concise, and 
 [extension.ts]
         │  (Orchestrates flow)
         ▼
-[GitService]───(gets staged diff)───▶
+[GitService]───(runs the git command as the user selects the command)───▶
         │
         ▼
-[AIService]───(sends diff + prompt to Groq API)───▶
+[AIService]───(GitService result + prompt to Groq API)───▶
         │
         ▼
-[MessageFormatter]───(formats commit message)───▶
+[Formatter]───(formats message)───▶
         │
         ▼
-[VS Code Git Input Box] (commit message ready)
+[VS Code Git Output Channel] (AI result ready)
 ```
-![CommitMate Flow](src/utils/architecture.png)
 
 ### Key Modules
 
