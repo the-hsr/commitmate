@@ -31,6 +31,6 @@ export async function showBranchCommitsSummary(context: vscode.ExtensionContext)
         outputChannel.show();
 
     } catch (err: any) {
-        showError(`Error generating branch summary: ${err.message}`);
+        showError(Messages.ERROR_GENERATING_BRANCH_SUMMARY(err.message));
     }
 }

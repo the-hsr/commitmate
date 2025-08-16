@@ -57,6 +57,6 @@ export async function generateCommitMessage(context: vscode.ExtensionContext) {
         showInfo(Messages.COMMIT_MESSAGE_SUCCESS(finalMessage.split("\n")[0]));
 
     } catch (err: any) {
-        showError(`Error: ${err.message}`);
+        showError(Messages.ERROR_GENERATING_COMMIT_MESSAGE(err.message));
     }
 }

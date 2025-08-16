@@ -11,8 +11,8 @@ export async function generateMergeRequestTemplate(context: vscode.ExtensionCont
         if (!apiKey) return;
 
         const userSpecifics = await vscode.window.showInputBox({
-            prompt: "Any specific details to include in the Merge Request template? (Optional)",
-            placeHolder: "E.g., dependencies updated, special configs applied, performance improvement notes..."
+            prompt: Messages.MERGE_REQUEST_TEMPLATE_USER_SPECIFICS,
+            placeHolder: Messages.MERGE_REQUEST_TEMPLATE_USER_SPECIFICS_PLACEHOLDER
         });
 
         const commitsLog = await GitService.getBranchCommits();
@@ -30,7 +30,7 @@ export async function generateMergeRequestTemplate(context: vscode.ExtensionCont
         });
 
         if (!summary) {
-            showError(Messages.FAILED_TO_GENERATE_BRANCH_SUMMARY);
+            showError(Messages.FAILED_TO_GENERATE_MERGE_REQUEST_TEMPLATE);
             return;
         }
 
@@ -40,6 +40,6 @@ export async function generateMergeRequestTemplate(context: vscode.ExtensionCont
         outputChannel.show();
 
     } catch (err: any) {
-        showError(`Error generating merge request template: ${err.message}`);
+        showError(Messages.ERROR_GENERATING_MERGE_REQUEST_TEMPLATE(err.message));
     }
 }

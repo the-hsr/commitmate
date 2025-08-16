@@ -1,11 +1,11 @@
 import Groq from "groq-sdk";
-import { Prompts } from "../constants/prompts";
 import { Config } from "../constants/config";
 import { GitService } from "./gitService";
 import { Messages } from "../constants/messages";
 import { isInternetAvailable, showError } from "../utils/vscodeUtils";
 import { ContextService } from "./contextService";
 import { getApiKeyOrShowError } from "../utils/apiKeyUtils";
+import { PromptBuilder } from "./PromptService/promptBuilder";
 
 export class AiService {
     private static groqInstance(apiKey: string) {
@@ -48,33 +48,33 @@ export class AiService {
     }
 
     static async generateCommitMessage(diff: string): Promise<string | undefined> {
-        return this.generateResponse(
-            Prompts.COMMIT_MESSAGE(diff)
-        );
-    }
+            const prompt = await PromptBuilder.buildCommitMessagePrompt(diff);
+            return this.generateResponse(prompt);
+        }
 
     static async generateShortTitleMessage(commitsContent: string) {
-        return this.generateResponse(
-            Prompts.SHORT_TITLE_MESSAGE(commitsContent)
-        );
+        const prompt = await PromptBuilder.buildShortTitleMessagePrompt(commitsContent);
+        return this.generateResponse(prompt);
     }
 
     static async generateBranchSummary(commitsLog: string) {
-        return this.generateResponse(
-            Prompts.BRANCH_SUMMARY(commitsLog)
-        );
+        const prompt = await PromptBuilder.buildBranchSummaryPrompt(commitsLog);
+        return this.generateResponse(prompt);
     }
 
     static async generateAuthorSpecificBranchSummary(commitsLog: string) {
         const currentUser = await GitService.getCurrentGitUser();
-        return this.generateResponse(
-            Prompts.AUTHOR_SPECIFIC_BRANCH_SUMMARY(commitsLog, currentUser)
-        );
+        const prompt = await PromptBuilder.buildAuthorSpecificBranchSummaryPrompt(commitsLog, currentUser);
+        return this.generateResponse(prompt);
     }
 
     static async generateMergeRequestTemplate(commitsLog: string, usersInput: string) {
-        return this.generateResponse(
-            Prompts.MERGE_REQUEST_TEMPLATE(commitsLog, usersInput)
-        );
+        const prompt = await PromptBuilder.buildMergeRequestTemplatePrompt(commitsLog, usersInput);
+        return this.generateResponse(prompt);
+    }
+
+    static async performCodeReview(diff: string) {
+        const prompt = await PromptBuilder.buildCodeReviewPrompt(diff);
+        return this.generateResponse(prompt);
     }
 }

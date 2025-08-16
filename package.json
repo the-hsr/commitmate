@@ -37,6 +37,11 @@
         "command": "commitmate.mergeRequestTemplate",
         "title": "CommitMate: Merge Request Template",
         "category": "CommitMate"
+      },
+      {
+        "command": "commitmate.performCodeReview",
+        "title": "CommitMate: Code Review",
+        "category": "CommitMate"
       }
     ],
     "menus": {
@@ -51,6 +56,10 @@
         },
         {
           "command": "commitmate.mergeRequestTemplate",
+          "group": "navigation"
+        },
+        {
+          "command": "commitmate.performCodeReview",
           "group": "navigation"
         }
       ]
