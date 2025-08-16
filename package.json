@@ -20,27 +20,27 @@
     "commands": [
       {
         "command": "commitmate.generateCommitMessage",
-        "title": "CommitMate: Generate Commit Message",
+        "title": "Generate Commit Message",
         "category": "CommitMate"
       },
       {
         "command": "commitmate.branchCommitSummary",
-        "title": "CommitMate: Glimpse of Branch Commits",
+        "title": "Glimpse of Branch Commits",
         "category": "CommitMate"
       },
       {
         "command": "commitmate.resetExtension",
-        "title": "CommitMate: Reset Extension",
+        "title": "Reset Extension",
         "category": "CommitMate"
       },
       {
         "command": "commitmate.mergeRequestTemplate",
-        "title": "CommitMate: Merge Request Template",
+        "title": "Merge Request Template",
         "category": "CommitMate"
       },
       {
         "command": "commitmate.performCodeReview",
-        "title": "CommitMate: Code Review",
+        "title": "Code Review",
         "category": "CommitMate"
       }
     ],
