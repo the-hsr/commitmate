@@ -3,7 +3,7 @@
   "displayName": "CommitMate",
   "version": "0.0.1",
   "publisher": "thehsr",
-  "icon": "assets/logo.png",
+  "icon": "assets/featureImage.png",
   "description": "An AI-powered VS Code extension that analyzes your staged Git diffs and meaningful. concise commit messages.",
   "engines": {
     "vscode": "^1.80.0"
