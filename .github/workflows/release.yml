@@ -1,19 +1,21 @@
-name: Release Extension
+name: Release
 
 on:
   push:
     tags:
-      - "v*.*.*"
+      - "v*"
+
+permissions:
+  contents: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -21,21 +23,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install vsce
-        run: npm install -g @vscode/vsce
+      - name: Package VSIX
+        run: npx vsce package
 
-      - name: Package extension
-        run: vsce package -o commitmate-${GITHUB_REF_NAME}.vsix
+      - name: List files
+        run: ls -l
 
-      - name: Upload VSIX as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: vsix
-          path: commitmate-${GITHUB_REF_NAME}.vsix
-
-      - name: Upload VSIX to GitHub Release
+      - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: commitmate-${GITHUB_REF_NAME}.vsix
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          files: commitmate-*.vsix
