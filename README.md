@@ -24,6 +24,7 @@ This extension acts as your **AI Git companion**, helping you maintain clean com
 
 ## 📦 Installation
 
+**Local Build:**
 1. **Clone the repository:**
    ```shell
    git clone https://github.com/the-hsr/commitmate.git
@@ -40,6 +41,10 @@ This extension acts as your **AI Git companion**, helping you maintain clean com
 4. **Run the extension:**
    - Press `F5` to launch CommitMate in a new VS Code Extension Development Host window.
 
+**Package Build:**
+```shell
+npm run package
+```
 ***
 
 ## 🧩 Commands
