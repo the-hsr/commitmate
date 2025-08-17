@@ -7,7 +7,7 @@ export const Messages = {
   ENTER_API_KEY: "Enter your Groq API Key (Can be found at: https://console.groq.com/keys)",
   GROQ_API_KEY_URL: "https://console.groq.com/keys",
   API_KEY_SAVED: "Groq API key saved successfully!",
-  COMMIT_MESSAGE_SUCCESS: (title: string) => `Commit message generated as ${title} and copied to clipboard (see 'AI Commit Message' panel).`,
+  COMMIT_MESSAGE_SUCCESS: (title: string) => `Commit message generated as ${title} and copied to clipboard (see 'CommitMate: - Commit Message' panel).`,
   GROQ_API_KEY_REQUIRED: "Groq API key is required. Extension features will be disabled.",
   GROQ_API_KEY_NOT_FOUND: "Groq API key not found. Please reload the extension.",
   SELECT_COMMIT_TYPE: "Select commit type",
