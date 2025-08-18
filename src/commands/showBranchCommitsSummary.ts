@@ -3,8 +3,14 @@ import { GitService } from "../services/gitService";
 import { AiService } from "../services/aiService";
 import { showError, showWarning } from "../utils/vscodeUtils";
 import { Messages } from "../constants/messages";
+import { analytics } from "../services/analyticsService";
 
 export async function showBranchCommitsSummary(context: vscode.ExtensionContext) {
+    await analytics.sendEvent("get_branch_commit_summary_menu", {
+        feature: "branch_commit_summary",
+        success: true,
+    });
+
     try {
         const commitsLog = await GitService.getBranchCommits();
         if (!commitsLog.trim()) {

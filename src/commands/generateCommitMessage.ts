@@ -4,12 +4,18 @@ import { AiService } from "../services/aiService";
 import { formatCommitMessage } from "../utils/messageFormatter";
 import { showInfo, showWarning, showError } from "../utils/vscodeUtils";
 import { getApiKeyOrShowError } from "../utils/apiKeyUtils";
+import { analytics } from "../services/analyticsService";
 
 // Import Constants
 import { commitTypeList, CommitType } from "../constants/commitTypes";
 import { Messages } from "../constants/messages";
 
 export async function generateCommitMessage(context: vscode.ExtensionContext) {
+    await analytics.sendEvent("generate_commit_message", {
+        feature: "commit_message",
+        success: true,
+    });
+
     try {
         const apiKey = await getApiKeyOrShowError();
         if(!apiKey) return;

@@ -4,8 +4,14 @@ import { AiService } from "../services/aiService";
 import { showError, showInfo, showWarning } from "../utils/vscodeUtils";
 import { Messages } from "../constants/messages";
 import { getApiKeyOrShowError } from "../utils/apiKeyUtils";
+import { analytics } from "../services/analyticsService";
 
 export async function performCodeReview(context: vscode.ExtensionContext) {
+    await analytics.sendEvent("perform_code_review", {
+        feature: "code_review",
+        success: true,
+    });
+
     try {
         const apiKey = await getApiKeyOrShowError();
         if (!apiKey) return;

@@ -25,6 +25,15 @@
     "watch": "tsc -w -p ./"
   },
   "contributes": {
+    "configuration": {
+      "properties": {
+        "myExtension.enableTelemetry": {
+          "type": "boolean",
+          "default": true,
+          "description": "Allow extension to collect anonymous usage analytics."
+        }
+      }
+    },
     "commands": [
       {
         "command": "commitmate.generateCommitMessage",
@@ -74,7 +83,8 @@
     }
   },
   "dependencies": {
-    "groq-sdk": "^0.30.0"
+    "groq-sdk": "^0.30.0",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
