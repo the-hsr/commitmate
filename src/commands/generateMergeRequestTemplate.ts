@@ -4,8 +4,14 @@ import { AiService } from "../services/aiService";
 import { showError, showWarning } from "../utils/vscodeUtils";
 import { Messages } from "../constants/messages";
 import { getApiKeyOrShowError } from "../utils/apiKeyUtils";
+import { analytics } from "../services/analyticsService";
 
 export async function generateMergeRequestTemplate(context: vscode.ExtensionContext) {
+    await analytics.sendEvent("generate_merge_request_template", {
+        feature: "merge_request",
+        success: true,
+    });
+    
     try {
         const apiKey = await getApiKeyOrShowError();
         if (!apiKey) return;

@@ -3,8 +3,14 @@ import { GitService } from "../services/gitService";
 import { AiService } from "../services/aiService";
 import { showError, showWarning } from "../utils/vscodeUtils";
 import { Messages } from "../constants/messages";
+import { analytics } from "../services/analyticsService";
 
 export async function showAuthorSpecificCommits(context: vscode.ExtensionContext) {
+    await analytics.sendEvent("get_author_specific_commits", {
+        feature: "author_specific_commits",
+        success: true,
+    });
+
     try {
         const commitsLog = await GitService.getAuthorSpecificCommits();
         if (!commitsLog.trim()) {
