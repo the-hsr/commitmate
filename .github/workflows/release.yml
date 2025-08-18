@@ -23,6 +23,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Inject GA secrets
+        run: |
+          echo "export const GA_MEASUREMENT_ID = '${{ secrets.GA_MEASUREMENT_ID }}';" > src/analyticsSecrets.ts
+          echo "export const GA_API_SECRET = '${{ secrets.GA_API_SECRET }}';" >> src/analyticsSecrets.ts
+
       - name: Package VSIX
         run: npx vsce package
 
