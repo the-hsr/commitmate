@@ -1,8 +1,8 @@
 {
-  "name": "commitmate",
-  "displayName": "CommitMate",
+  "name": "commitmate-ai",
+  "displayName": "CommitMate-AI",
   "version": "1.0.0",
-  "publisher": "thehsr",
+  "publisher": "the-hsr",
   "icon": "assets/featureImage.png",
   "description": "Streamline Git workflow by integrating AI-powered commit messages, summaries, merge request templates, and code reviews directly into VS Code.",
   "engines": {
